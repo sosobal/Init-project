@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-protected Button btHomepage;
+protected Button btHomepage, btDial, btCall;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +20,26 @@ protected Button btHomepage;
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://ice.mokwon.ac.kr"));
                 startActivity(intent);
+            }
+        });
+
+        btDial = (Button)findViewById(R.id.btDial);
+        btDial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:0428297670"));
+                startActivity(intent);
+
+            }
+        });
+
+        btCall = (Button)findViewById(R.id.btCall);
+        btCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:0428297670"));
+                startActivity(intent);
+
             }
         });
             }

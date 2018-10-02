@@ -12,4 +12,16 @@
        android:text="Homepage"
        android:id="@+id/btHomepage"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dial"
+        android:id="@+id/btDial"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call"
+        android:id="@+id/btCall"/>
+
 </android.support.constraint.ConstraintLayout>
