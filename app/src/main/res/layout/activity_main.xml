@@ -37,4 +37,16 @@
         android:text="Map"
         android:id="@+id/btMap"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recog"
+        android:id="@+id/btRecog"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tv"
+        android:id="@+id/tvRecog"/>
+
 </LinearLayout>
