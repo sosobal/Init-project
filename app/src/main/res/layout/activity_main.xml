@@ -31,4 +31,10 @@
         android:text="SMS"
         android:id="@+id/btSms"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Map"
+        android:id="@+id/btMap"/>
+
 </LinearLayout>
