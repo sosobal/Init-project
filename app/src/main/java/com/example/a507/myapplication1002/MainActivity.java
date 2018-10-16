@@ -1,16 +1,21 @@
 package com.example.a507.myapplication1002;
 
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 protected Button btHomepage, btDial, btCall, btSms, btMap, btRecog;
 protected TextView tvRecog;
+private static int CODE_RECOG = 1234;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +74,15 @@ protected TextView tvRecog;
         btRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                voiceRecog()
             }
         });
+            }
+            private void voiceRecog() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.KOREA);
+        startActivityForResult(intent,CODE_RECOG);
             }
     }
 
