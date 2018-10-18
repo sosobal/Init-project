@@ -50,4 +50,18 @@
         android:text="tv"
         android:id="@+id/tvRecog"/>
 
+ <EditText
+     android:id="@+id/edTts"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:ems="10"
+     android:inputType="textPersonName"
+     android:text="TTS" />
+
+ <Button
+     android:id="@+id/btTts"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:text="TTS" />
+
 </LinearLayout>
