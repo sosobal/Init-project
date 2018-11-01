@@ -23,7 +23,7 @@ protected Button btHomepage, btDial, btCall, btSms, btMap, btRecog, btTts , btEc
 protected TextView tvRecog;
 protected EditText etTts, etDelay;
 protected TextToSpeech tts;
-private static int CODE_RECOG = 1215 , CODE_ECHO = 1227;
+private static final int CODE_RECOG = 1215 , CODE_ECHO = 1227;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ private static int CODE_RECOG = 1215 , CODE_ECHO = 1227;
         btRecog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                voiceRecog()
+                voiceRecog(CODE_RECOG);
             }
         });
         etTts = (EditText) findViewById(R.id.edTts);
@@ -91,8 +91,7 @@ private static int CODE_RECOG = 1215 , CODE_ECHO = 1227;
         btTts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String str = etTts.getText().toString();
-                tts.speak(str, TextToSpeech.QUEUE_FLUSH,null,null);
+                speakStr(etTts.getText().toString());
             }
         });
         tts = new TextToSpeech(this,this);
@@ -105,13 +104,25 @@ private static int CODE_RECOG = 1215 , CODE_ECHO = 1227;
         });
         etDelay = (EditText)findViewById(R.id.etDealy);
             }
-            private void voiceRecog() {
+            private void voiceRecog(int nCode) {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.KOREA);
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please speak.");
-        startActivityForResult(intent,CODE_RECOG);
+        startActivityForResult(intent,nCode);
             }
+
+            private  void speakStr(String str) {
+        tts.speak(str, TextToSpeech.QUEUE_FLUSH, null, null);
+        while (tts.isSpeaking()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+                }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -125,11 +136,14 @@ private static int CODE_RECOG = 1215 , CODE_ECHO = 1227;
             }else if (requestCode == CODE_ECHO) {
                     ArrayList<String> arList = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     String sRecog = arList.get(0);
+                    String sDelay = etDelay.getText().toString();
+                    int nDealy = Integer.parseInt(sDelay); //in sec
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(nDealy*1000); // in msec
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    speakStr(sRecog);
 
                 }
 
