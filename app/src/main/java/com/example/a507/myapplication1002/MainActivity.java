@@ -19,11 +19,12 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
-protected Button btHomepage, btDial, btCall, btSms, btMap, btRecog, btTts;
+protected Button btHomepage, btDial, btCall, btSms, btMap, btRecog, btTts , btEcho;
 protected TextView tvRecog;
-protected EditText etTts;
+protected EditText etTts, etDelay;
 protected TextToSpeech tts;
-private static int CODE_RECOG = 1215;
+private static int CODE_RECOG = 1215 , CODE_ECHO = 1227;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +96,14 @@ private static int CODE_RECOG = 1215;
             }
         });
         tts = new TextToSpeech(this,this);
+        btEcho = (Button)findViewById(R.id.btEcho);
+        btEcho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                voiceRecog(CODE_ECHO);
+            }
+        });
+        etDelay = (EditText)findViewById(R.id.etDealy);
             }
             private void voiceRecog() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -107,13 +116,22 @@ private static int CODE_RECOG = 1215;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == CODE_RECOG) {
             if (resultCode == Activity.RESULT_OK && data != null) {
+                if(requestCode == CODE_RECOG) {
                 ArrayList<String> arList = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 String sRecog = arList.get(0);
                 tvRecog.setText(sRecog);
 
-            }
+            }else if (requestCode == CODE_ECHO) {
+                    ArrayList<String> arList = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String sRecog = arList.get(0);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
 
         }
 

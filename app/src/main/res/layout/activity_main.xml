@@ -64,4 +64,18 @@
      android:layout_height="wrap_content"
      android:text="TTS" />
 
+ <Button
+     android:id="@+id/btEcho"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:text="ECHO" />
+
+ <EditText
+     android:id="@+id/etDealy"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:ems="10"
+     android:inputType="textPersonName"
+     android:text="Delay" />
+
 </LinearLayout>
