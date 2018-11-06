@@ -136,6 +136,26 @@ private static final int CODE_RECOG = 1215 , CODE_ECHO = 1227 ,  CODE_CONTACT = 
         }
                 }
 
+                private String getPhoneNumFromName(String sName) {
+        String sPhoneNum = "";
+                    Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_FILTER_URI, Uri.encode(sName));
+                    String[] arProjection = new String[]{ContactsContract.Contacts._ID};
+                    Cursor cursor = getContentResolver().query(uri, arProjection, null, null, null);
+                    if (cursor != null && cursor.moveToFirst()) {
+                        String sId = cursor.getString(0);
+                        String[] arProjNum = new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER};
+                        String sWhereNum = ContactsContract.Data.MIMETYPE + " = ? AND " + ContactsContract.CommonDataKinds.StructuredName.CONTACT_ID + " = ?";
+                        String[] sWhereNumParam = new String[]{ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE, sId};
+                        Cursor cursorNum = getContentResolver().query(ContactsContract.Data.CONTENT_URI, arProjNum, sWhereNum, sWhereNumParam, null);
+                        if (cursorNum != null && cursorNum.moveToFirst()) {
+                            sPhoneNum = cursorNum.getString(0);
+                        }
+                        cursorNum.close();
+                    }
+                    cursor.close();
+        return sPhoneNum;
+                }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -160,7 +180,7 @@ private static final int CODE_RECOG = 1215 , CODE_ECHO = 1227 ,  CODE_CONTACT = 
 
                 }
                 else if (requestCode == CODE_CONTACT) {
-                    String[] sFilter = {ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
+                    String[] sFilter = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
                     Cursor cursor = getContentResolver().query(data.getData(), sFilter, null, null, null);
                     if (cursor != null) {
                         cursor.moveToFirst();
