@@ -2,8 +2,10 @@ package com.example.a507.myapplication1002;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.location.Location;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
@@ -14,16 +16,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
-protected Button btHomepage, btDial, btCall, btSms, btMap, btRecog, btTts , btEcho;
+protected Button btHomepage, btDial, btCall, btSms, btMap, btRecog, btTts , btEcho, btContact;
 protected TextView tvRecog;
 protected EditText etTts, etDelay;
 protected TextToSpeech tts;
-private static final int CODE_RECOG = 1215 , CODE_ECHO = 1227;
+private static final int CODE_RECOG = 1215 , CODE_ECHO = 1227 ,  CODE_CONTACT = 1529;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +106,18 @@ private static final int CODE_RECOG = 1215 , CODE_ECHO = 1227;
             }
         });
         etDelay = (EditText)findViewById(R.id.etDealy);
+        btContact = (Button) findViewById(R.id.btContact);
+        btContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                startActivityForResult(intent, CODE_CONTACT);
             }
-            private void voiceRecog(int nCode) {
+        });
+    }
+
+    private void voiceRecog(int nCode) {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.KOREA);
@@ -145,6 +158,17 @@ private static final int CODE_RECOG = 1215 , CODE_ECHO = 1227;
                     }
                     speakStr(sRecog);
 
+                }
+                else if (requestCode == CODE_CONTACT) {
+                    String[] sFilter = {ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
+                    Cursor cursor = getContentResolver().query(data.getData(), sFilter, null, null, null);
+                    if (cursor != null) {
+                        cursor.moveToFirst();
+                        String sName = cursor.getString(0);
+                        String sPhoneNum = cursor.getString(1);
+                        cursor.close();
+                        Toast.makeText(this, sName + "=" +sPhoneNum, Toast.LENGTH_LONG).show();
+                    }
                 }
 
         }
