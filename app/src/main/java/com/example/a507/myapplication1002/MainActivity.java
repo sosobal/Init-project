@@ -29,7 +29,7 @@ protected EditText etTts, etDelay;
 public ImageView ivBitmap;
 protected TextToSpeech tts;
 private static final int CODE_RECOG = 1215 , CODE_ECHO = 1227 ,  CODE_CONTACT = 1529;
-protected String sBitmapUrl;
+protected String sBitmapUrl = "https://sites.google.com/site/yongheuicho/_/rsrc/1313446792839/config/customLogo.gif?revision=1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
