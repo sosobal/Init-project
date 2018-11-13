@@ -13,11 +13,11 @@
        android:text="Homepage"
        android:id="@+id/btHomepage"/>
 
- <Button
-     android:id="@+id/btDial"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:text="Dial" />
+    <Button
+        android:id="@+id/btDial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dial" />
 
     <Button
         android:layout_width="wrap_content"
@@ -84,4 +84,14 @@
      android:text="CONTACT"
      android:id="@+id/btContact"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivBitmap"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btBitmap"
+        android:text="Bitmap"/>
 </LinearLayout>
