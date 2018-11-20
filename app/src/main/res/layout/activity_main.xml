@@ -114,5 +114,11 @@
         android:layout_height="wrap_content"
         android:text="Toast Ps"
         android:id="@+id/btToastPs"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Svc"
+            android:id="@+id/btService"/>
     </LinearLayout>
 </LinearLayout>
