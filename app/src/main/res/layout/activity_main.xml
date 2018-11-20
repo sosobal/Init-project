@@ -7,6 +7,9 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
    <Button
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
@@ -31,6 +34,11 @@
         android:text="SMS"
         android:id="@+id/btSms"/>
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,6 +57,7 @@
         android:layout_height="wrap_content"
         android:text="tv"
         android:id="@+id/tvRecog"/>
+    </LinearLayout>
 
  <EditText
      android:id="@+id/etTts"
