@@ -73,19 +73,24 @@
      android:layout_height="wrap_content"
      android:text="TTS" />
 
+    <EditText
+        android:id="@+id/etDelay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="1" />
+
  <Button
      android:id="@+id/btEcho"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:text="ECHO" />
 
- <EditText
-     android:id="@+id/etDelay"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:ems="10"
-     android:inputType="textPersonName"
-     android:text="1" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
  <Button
      android:layout_width="wrap_content"
@@ -109,4 +114,5 @@
         android:layout_height="wrap_content"
         android:text="Toast Ps"
         android:id="@+id/btToastPs"/>
+    </LinearLayout>
 </LinearLayout>
