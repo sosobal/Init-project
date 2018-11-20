@@ -51,7 +51,7 @@
         android:id="@+id/tvRecog"/>
 
  <EditText
-     android:id="@+id/edTts"
+     android:id="@+id/etTts"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:ems="10"
@@ -71,7 +71,7 @@
      android:text="ECHO" />
 
  <EditText
-     android:id="@+id/etDealy"
+     android:id="@+id/etDelay"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:ems="10"
