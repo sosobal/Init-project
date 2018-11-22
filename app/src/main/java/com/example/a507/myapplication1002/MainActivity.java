@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     }
 
     private void updateService() {
-        Intent intent = new Intent(this, PhonCallService.class);
+        Intent intent = new Intent(this, PhoneCallService.class);
         if (bService) {
             stopService(intent);
             bService = false;
@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     @Override
     protected void onDestroy() {
         if (bService) {
-            Intent intent = new Intent(this, PhonCallService.class);
+            Intent intent = new Intent(this, PhoneCallService.class);
             stopService(intent);
         }
         super.onDestroy();
